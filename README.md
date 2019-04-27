@@ -69,8 +69,12 @@ FIERCE SCAN_LOCATION:
 FIERCE LOG_SHA1:
 ```sha1sum *_FIERCE.txt | awk '{print $1}'```
 
+FIERCE IP:
+``` $IpS >> ```
+
 
 Commandes après flux de redirection.
 
 
 Ajout de séparateur "," dans le script.
+
