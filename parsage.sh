@@ -17,7 +17,6 @@ cat *_NIKTO.txt | grep "+ GET" | tr -d ',' | paste -d " " - - - - - - - - - - - 
 
 
 #NMAP IP/DNS
-
 cat *_NMAP.txt | grep -a "addr=" | cut -d'"' -f2 | sed 's/[^;]$/&,/' > NMAP/nmap_ip.csv
 
 #NMAP PORT:
@@ -36,8 +35,29 @@ find /root/logs_scan/ -name "*_NMAP.txt" | sed 's/[^;]$/&,/' > NMAP/nmap_flocati
 sha1sum *_NMAP.txt | awk '{print $1}' | sed 's/[^;]$/&,/' > NMAP/nmap_shasum.csv
 
 #NMAP CVSS:
-
 echo "-," > NMAP/nmap_cvss.csv
 
 #NMAP BREACH:
 cat *_NMAP.txt | grep "state" | awk '{print $7$8$9$10$11}' | paste -d " " - - - - - - - - - - - | sed 's/[^;]$/&,/' > NMAP/nmap_breach.csv
+
+#FIERCE
+
+#FIERCE IP/DNS
+
+cat *_fierce.txt | awk '{print $2}' | grep "www" | sed 's/[^;]$/&,/' > FIERCE/fierce_ip.csv
+
+#FIERCE SCAN_DATE:
+date -r *_fierce.txt "+%m-%d-%Y %H:%M:%S" | sed 's/[^;]$/&,/' > FIERCE/fierce_date.csv
+
+#FIERCE SCAN_LOCATION:
+find /root/logs_scan/ -name "*_fierce.txt" | sed 's/[^;]$/&,/' > FIERCE/fierce_flocation.csv
+
+#FIERCE LOG_SHA1:
+sha1sum *_fierce.txt | awk '{print $1}' | sed 's/[^;]$/&,/' > FIERCE/fierce_shasum.csv
+
+#FIERCE BREACH:
+cat *_fierce.txt | awk '{print $2}' | grep "ns" | paste -d " " - - - - - - - - - - - - - | sed 's/[^;]$/&,/' > FIERCE/fierce_breach.csv
+
+#FIERCE CVSS:
+echo "-" > FIERCE/fierce_cvss.csv
+
