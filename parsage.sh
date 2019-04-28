@@ -1,20 +1,41 @@
+#!/usr/bin/bash
+#-*- coding: utf-8-*-
+# ==============================================================================
+# title           :parsage.sh                                                  #
+# description     :Parse log file .                                            #
+# author          :Odka33 - Elie BEN AYOUN                                     #
+# date            :28/04/2019                                                  #
+# version         :0.1                                                         #
+# usage           : ./parsage.sh .                                             #
+# ==============================================================================
 
+#NIKTO
+
+#NIKTO IP/DNS
 cat *_NIKTO.txt | grep -i "target host" | awk -F':' '{print$NF}'"IP" | sed 's/[^;]$/&,/' > NIKTO/nikto_ip.csv  
 
+#NIKTO PORT:
 cat *_NIKTO.txt | awk '/Port/ {print $4}' | sed 's/[^;]$/&,/' > NIKTO/nikto_port.csv 
 
+#NIKTO NAME:
 cat *_NIKTO.txt | grep "Nikto" | awk '{print $2, $3 }' | sed 's/[^;]$/&,/' > NIKTO/nikto_name.csv
 
+#NIKTO DATE:
 date -r *_NIKTO.txt "+%m-%d-%Y %H:%M:%S" | sed 's/[^;]$/&,/' > NIKTO/nikto_date.csv
 
+#NIKTO FILE LOCATION:
 find /root/logs_scan/ -name "*_NIKTO.txt" | sed 's/[^;]$/&,/' > NIKTO/nikto_flocation.csv
 
+#NIKTO SHASUM:
 sha1sum *_NIKTO.txt | awk '{print $1}' | sed 's/[^;]$/&,/' > NIKTO/nikto_shasum.csv
 
+#NIKTO CVSS:
 cat  *_NIKTO.txt | grep "OSVDB" | sed 'N;s/\n/ /' | sed 's/[^;]$/&,/' > NIKTO/nikto_cvss.csv
 
+#NIKTO BREACH:
 cat *_NIKTO.txt | grep "+ GET" | tr -d ',' | paste -d " " - - - - - - - - - - - - - | sed 's/[^;]$/&,/' > NIKTO/nikto_breach.csv
 
+#NMAP
 
 #NMAP IP/DNS
 cat *_NMAP.txt | grep -a "addr=" | cut -d'"' -f2 | sed 's/[^;]$/&,/' > NMAP/nmap_ip.csv
