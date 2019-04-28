@@ -80,5 +80,5 @@ sha1sum *_fierce.txt | awk '{print $1}' | sed 's/[^;]$/&,/' > FIERCE/fierce_shas
 cat *_fierce.txt | awk '{print $2}' | grep "ns" | paste -d " " - - - - - - - - - - - - - | sed 's/[^;]$/&,/' > FIERCE/fierce_breach.csv
 
 #FIERCE CVSS:
-echo "-" > FIERCE/fierce_cvss.csv
+echo "-," > FIERCE/fierce_cvss.csv
 
