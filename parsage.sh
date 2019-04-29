@@ -35,6 +35,8 @@ cat  *_NIKTO.txt | grep "OSVDB" | sed 'N;s/\n/ /' | sed 's/[^;]$/&,/' > NIKTO/ni
 #NIKTO BREACH:
 cat *_NIKTO.txt | grep "+ GET" | tr -d ',' | paste -d " " - - - - - - - - - - - - - | sed 's/[^;]$/&,/' > NIKTO/nikto_breach.csv
 
+paste -d '' NIKTO/nikto_name.csv NIKTO/nikto_date.csv NIKTO/nikto_flocation.csv NIKTO/nikto_shasum.csv NIKTO/nikto_ip.csv NIKTO/nikto_port.csv NIKTO/nikto_cvss.csv NIKTO/nikto_breach.csv > $(date +%m.%d.%Y)_nikto.csv
+
 #NMAP
 
 #NMAP IP/DNS
@@ -61,11 +63,17 @@ echo "-," > NMAP/nmap_cvss.csv
 #NMAP BREACH:
 cat *_NMAP.txt | grep "state" | awk '{print $7$8$9$10$11}' | paste -d " " - - - - - - - - - - - | sed 's/[^;]$/&,/' > NMAP/nmap_breach.csv
 
+paste -d '' NMAP/nmap_name.csv NMAP/nmap_date.csv NMAP/nmap_flocation.csv NMAP/nmap_shasum.csv NMAP/nmap_ip.csv NMAP/nmap_port.csv NMAP/nmap_cvss.csv NMAP/nmap_breach.csv > $(date +%m.%d.%Y)_nmap.csv
 #FIERCE
 
-#FIERCE IP/DNS
-
+#FIERCE IP/DNS:
 cat *_fierce.txt | awk '{print $2}' | grep "www" | sed 's/[^;]$/&,/' > FIERCE/fierce_ip.csv
+
+#FIERCE NAME:
+echo 'fierce,' > FIERCE/fierce_name.csv
+
+#FIERCE PORT:
+echo '53,' > FIERCE/fierce_port.csv
 
 #FIERCE SCAN_DATE:
 date -r *_fierce.txt "+%m-%d-%Y %H:%M:%S" | sed 's/[^;]$/&,/' > FIERCE/fierce_date.csv
@@ -82,3 +90,4 @@ cat *_fierce.txt | awk '{print $2}' | grep "ns" | paste -d " " - - - - - - - - -
 #FIERCE CVSS:
 echo "-," > FIERCE/fierce_cvss.csv
 
+paste -d '' FIERCE/fierce_name.csv FIERCE/fierce_date.csv FIERCE/fierce_flocation.csv FIERCE/fierce_shasum.csv FIERCE/fierce_ip.csv FIERCE/fierce_port.csv FIERCE/fierce_cvss.csv FIERCE/fierce_breach.csv > $(date +%m.%d.%Y)_fierce.csv

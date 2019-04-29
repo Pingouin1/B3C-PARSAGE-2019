@@ -1,0 +1,1 @@
+Nmap 7.70,04-09-2019 14:50:21,/root/logs_scan/04.09.2019_NMAP.txt,b495073c9d846363226d85f29a1904d001827be7,51.38.233.224,21 22 80        ,-,  name="ftp"product="vsftpd"version="3.0.3"ostype="Unix"method="probed" name="ssh"product="OpenSSH"version="7.4p1Debian10+deb9u4" name="http"product="Apachehttpd"version="2.4.25"extrainfo="(Debian)"      ,
