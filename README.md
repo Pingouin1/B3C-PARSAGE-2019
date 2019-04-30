@@ -36,4 +36,4 @@ Il est possible de rajouter le script de parsage au python de rejeu des scans en
     os.system("cd /logs_scan/ && ./parsage")
 ```
 
-Les scans parser sont dans /root/logs_scan/date_scan/
+Les scans parser sont dans /root/logs_scan/*date*_scan/
